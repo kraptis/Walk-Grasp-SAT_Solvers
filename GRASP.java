@@ -9,10 +9,7 @@ import java.util.Hashtable;
 import java.util.Random;
 import java.util.Vector;
 
-/**
- *
- * @author gk
- */
+
 public class GRASP {
 
 	private CNF cnf;
