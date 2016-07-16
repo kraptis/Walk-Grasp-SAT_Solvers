@@ -4,10 +4,7 @@
  */
 package msc.krr.dynsat;
 
-/**
- *
- * @author gk
- */
+
 public class WalkDynSAT extends DynSATSolver {
 
 	protected WalkSAT walkSAT = new WalkSAT();
