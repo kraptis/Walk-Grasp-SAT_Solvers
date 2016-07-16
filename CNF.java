@@ -1,8 +1,4 @@
-//<editor-fold defaultstate="collapsed" desc=" changes 5/12/2009 gk ">
-/**
- * προσθήκη static int για TRUE, FALSE, UNASSIGNED
- */
-//</editor-fold>
+
 
 package msc.krr.dynsat;
 
