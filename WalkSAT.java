@@ -7,29 +7,18 @@ import java.util.ListIterator;
 import java.util.Random;
 
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.CBD36D6E-08CF-4723-0616-CFCEF1110C1D]
-// </editor-fold> 
 public class WalkSAT {
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.C315636C-DAC5-EAAE-81A1-82AA33024608]
-    // </editor-fold> 
+   
     private Integer noOfRestarts;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.9D173483-E814-7A51-4121-5D767BF3AE8D]
-    // </editor-fold> 
+  
     private Integer noOfFlips;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.BF062A53-26ED-43D1-C472-880F97B89AC1]
-    // </editor-fold> 
+   
     private Float p;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.85DCDF73-3A98-9539-6387-158660E366B6]
-    // </editor-fold> 
+   
     private CNF aCNF;
 
     private Solution best;
@@ -41,7 +30,7 @@ public class WalkSAT {
 
     private Vector<Integer> tabu;
 
-    //prosthetei tin metavliti pou egine flip ston tabu
+    //add the variable which was  fliped to tabu
     private void addVarTabu(Integer Var){
         if(tabu.size()==getTabuSize()){
         tabu.remove(0);
@@ -50,8 +39,7 @@ public class WalkSAT {
         else tabu.addElement(Var);
     }
 
-    //elegxei an iparxei i metavliti pou tha lisei ston tabu,
-    //i=1 iparxei,i=0 den iparxei
+    //check if the variable exists in tabu,
     private Integer checkTabu(Integer Var){
         int j=0;
         int i=0;
@@ -65,9 +53,7 @@ public class WalkSAT {
         return i;
     }
 
-//epistrefei taksinomineno vector<litNG> me tis metavlites kai to
-// antistiho negative gain tis
-//
+//return a sorted vector<litNG> with the negative gains
     private Vector<litNG> returnNGLiterals(Vector<Integer> literals){
         Vector<litNG> ngoflit = new Vector<litNG>();
         int temp;
@@ -87,76 +73,51 @@ public class WalkSAT {
         return ngoflit;
     }
 
-    //dialegei mia random metavliti apo to clause c
+    //pick a random var from clause c
     private Integer getRandomL(Integer c){
         int l;
         Vector<Integer> literals;
         literals=aCNF.clauses.get(c);
-        int d = rn.nextInt(literals.size());//l= random apo c clause
+        int d = rn.nextInt(literals.size());//l= random from c clause
         l=literals.get(d);
         return l;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.E356CB0C-0343-2FA4-91D9-01521B0EB358]
-    // </editor-fold> 
     public WalkSAT () {
    
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.900ADE01-C375-01A7-693B-27ABC591AD79]
-    // </editor-fold> 
     public CNF getACNF () {
         return aCNF;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.4E19D015-376A-D25D-5731-2564AC16E3AA]
-    // </editor-fold> 
     public void setACNF (CNF val) {
         this.aCNF = val;
     }
 
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.E06CA75B-064D-8724-5B1A-5A5F04B35188]
-    // </editor-fold> 
     public Integer getNoOfFlips () {
         return noOfFlips;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.601360AB-FBE0-6244-FAAD-38AF8DA06BAC]
-    // </editor-fold> 
     public void setNoOfFlips (Integer val) {
         this.noOfFlips = val;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.E57E3B27-2C15-83C7-A438-B4C93B742424]
-    // </editor-fold> 
     public Integer getNoOfRestarts () {
         return noOfRestarts;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.3059F8F3-59E5-6DE2-7A01-BC69BDB28F39]
-    // </editor-fold> 
+  
     public void setNoOfRestarts (Integer val) {
         this.noOfRestarts = val;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.569C89CC-D8BA-140A-5923-9923ED0567E7]
-    // </editor-fold> 
+  
     public Float getP () {
         return p;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.1E9E9345-FF00-743E-60B9-6B3E04550C05]
-    // </editor-fold> 
+   
     public void setP (Integer val) {
         this.setP(val);
     }
@@ -169,36 +130,23 @@ public class WalkSAT {
         this.setTabuSize(val);
     }
   
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.525E908D-7B1B-1D7F-D636-0AB615D0E679]
-    // </editor-fold> 
+  
     public Solution getBest () {
         return best;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.CA913E99-66FA-41C9-F33A-651889C8A738]
-    // </editor-fold> 
     public void setBest (Solution val) {
         this.best = val;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.1A16E291-09DC-C152-3DA0-6625107F80A3]
-    // </editor-fold> 
+   
     public void setInitialAssignment (Integer[] assignment) {
-        //TODO: REVERT BACK
-        //for(int i=1;i<assignment.length;i++)
-        //    aCNF.setVar(i, assignment[i]);
         aCNF.setAssignment(assignment);
     }
 
     private final Random rn = new Random();
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.EEE03736-88F2-1EF4-7DD1-36399763294B]
-    // </editor-fold> 
+
     public Boolean solve () {
         int i=0;
         int current_clause=0;
@@ -207,10 +155,10 @@ public class WalkSAT {
         int random_var_to_flip=0;
         int variable_is_in_tabu=0;
         int checktabu=0;
-        int countloops=0;//metraei tis epanalipseis mexri na vrei katalilo literal
-        int countloops2=0;//metraei tis epanalipseis mexri na vrei unsat clause
+        int countloops=0;//counts the loops until it finds  a fitting literal
+        int countloops2=0;//counts the loops until it finds an  unsat clause
         int l=0;//literal
-        int l_ng=0;//negative gain tou literal l
+        int l_ng=0;//the negative gain of literal l
         boolean solved= false;
         best = aCNF.getSolution();
 
@@ -218,11 +166,7 @@ public class WalkSAT {
         Vector<Integer> literals = null;
         Vector<litNG> ngliterals = null;
         Vector<Integer> n = null;
-		  //TODO
-		  //να υλοποιηθεί με while να μην κάνει άσκοπα restarts
-		  //επίσης μετά από κάθε restart θα πρέπει η ανάθεση τιμών στις μεταβλητές
-		  //να γίνει ίση με την αρχική...
-		  //να επιστρέφει true αν λύθηκε ή false αν δεν λύθηκε...
+		
         while(i<noOfRestarts && solved==false){
             countloops=0;
             countloops2=0;
@@ -262,7 +206,7 @@ public class WalkSAT {
                     countloops = 0;
                 }
                 
-                double d = rn.nextDouble();//pernei times apo 0.0-1.0
+                double d = rn.nextDouble();
                 if(l_ng==0 && checktabu!=-1 && l!=0 ){
                     var_to_flip=l;// var with zero negative gain in c;
                     variable_is_in_tabu=checkTabu(var_to_flip);
@@ -309,27 +253,9 @@ public class WalkSAT {
 
   
 
-//epistrefei ena random unsat clause,-1 an den dialeksei kanena
-   /* private int getRandomUnSatClause(int countloops2,Vector<Integer> n) {
-        //Vector<Integer> unsc;
-       // unsc=aCNF.getUnSatClauses();
 
-        //System.out.println("UNSAT CLAUSES: "+unsc.size() + " LOOP COUNT: "+countloops2);
-        //if(unsc.size()==0)
-        //{
-         //   System.out.println(aCNF.getSolution());
-        //}
 
-        //Collections.shuffle(n);
-        if(countloops2<n.size())
-            return n.elementAt(countloops2);
-        
-        return -1;
-
-    }*/
-
-    //dialegei to literal pou pithanon na ginei flip,epistrefei kai to
-    //negative gain tou
+   
     private litNG chooseliteral(int countloops, Vector<litNG> ngliterals) {
         litNG ling = new litNG(0,0);
         
@@ -390,7 +316,7 @@ public class WalkSAT {
 
     private class litNG{
         int literals;
-        int ng;//negative gain tou literal
+        int ng;//negative gain of literal
 
         private litNG(int l, int temp) {
             literals=l;
